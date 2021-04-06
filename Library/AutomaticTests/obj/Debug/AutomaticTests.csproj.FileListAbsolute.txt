@@ -1,0 +1,5 @@
+C:\Users\T0202928\RiderProjects\Library\AutomaticTests\bin\Debug\AutomaticTests.exe
+C:\Users\T0202928\RiderProjects\Library\AutomaticTests\bin\Debug\AutomaticTests.pdb
+C:\Users\T0202928\RiderProjects\Library\AutomaticTests\obj\Debug\AutomaticTests.csprojResolveAssemblyReference.cache
+C:\Users\T0202928\RiderProjects\Library\AutomaticTests\obj\Debug\AutomaticTests.exe
+C:\Users\T0202928\RiderProjects\Library\AutomaticTests\obj\Debug\AutomaticTests.pdb
