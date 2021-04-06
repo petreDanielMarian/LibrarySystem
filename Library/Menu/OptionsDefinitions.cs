@@ -2,22 +2,24 @@
 
 namespace Library.Menu
 {
-    public class MenuOptionsDefinitions
+    public static class MenuOptionsDefinitions
     {
-        public static IMenuOption BorrowBook = new BorrowBookMenuOption();
-        public static IMenuOption NumberOfTitles = new GetNumberOfTitlesMenuOption();
-        public static IMenuOption NumberOfAvailableBooks = new GetNumberOfAvailableBooksMenuOption();
-        public static IMenuOption ReturnBook = new ReturnBookMenuOption();
-        public static IMenuOption AddBook = new AddBookMenuOption();
-        public static IMenuOption Exit = new ExitMenuOption();
+        public static readonly IMenuOption BorrowBook = new BorrowBookMenuOption();
+        public static readonly IMenuOption NUMBER_OF_COPIES = new GetNumberOfCopiesMenuOption();
+        public static readonly IMenuOption NUMBER_OF_AVAILABLE_BOOKS = new GetAvailableBooksMenuOption();
+        public static readonly IMenuOption ReturnBook = new ReturnBookMenuOption();
+        public static readonly IMenuOption AddBook = new AddBookMenuOption();
+        public static readonly IMenuOption SwitchUsers = new SwitchUserMenuOption();
+        public static readonly IMenuOption Exit = new ExitMenuOption();
 
         public static IEnumerable<IMenuOption> MenuOptions = new List<IMenuOption>
         {
-            BorrowBook,
-            NumberOfTitles,
-            NumberOfAvailableBooks,
-            ReturnBook,
             AddBook,
+            BorrowBook,
+            ReturnBook,
+            NUMBER_OF_AVAILABLE_BOOKS,
+            NUMBER_OF_COPIES,
+            SwitchUsers,
             Exit
         };
     }

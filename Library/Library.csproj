@@ -38,22 +38,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Book.cs" />
     <Compile Include="ConsoleHelper.cs" />
-    <Compile Include="IBook.cs" />
-    <Compile Include="LibraryApplication.cs" />
+    <Compile Include="ExtensionMethods\CollectionExtensions.cs" />
+    <Compile Include="ExtensionMethods\StringExtensions.cs" />
     <Compile Include="LibraryApplicationConstants.cs" />
+    <Compile Include="LibraryBook\AbstractBook.cs" />
+    <Compile Include="LibraryBook\Book.cs" />
+    <Compile Include="LibraryBook\BorrowedBookForm.cs" />
+    <Compile Include="LibraryBook\IBook.cs" />
+    <Compile Include="LibrarySystem.cs" />
     <Compile Include="Menu\AbstractMenuOption.cs" />
     <Compile Include="Menu\AddBookMenuOption.cs" />
     <Compile Include="Menu\BorrowBookMenuOption.cs" />
     <Compile Include="Menu\ExitMenuOption.cs" />
-    <Compile Include="Menu\GetNumberOfAvailableBooksMenuOption.cs" />
-    <Compile Include="Menu\GetNumberOfTitlesMenuOption.cs" />
+    <Compile Include="Menu\GetAvailableBooksMenuOption.cs" />
+    <Compile Include="Menu\GetNumberOfCopiesMenuOption.cs" />
     <Compile Include="Menu\IMenuOption.cs" />
     <Compile Include="Menu\OptionsDefinitions.cs" />
     <Compile Include="Menu\ReturnBookMenuOption.cs" />
+    <Compile Include="Menu\SwitchUserMenuOption.cs" />
     <Compile Include="Permission.cs" />
-    <Compile Include="LibraryAppStartPoint.cs" />
+    <Compile Include="LibraryApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,4 +1,6 @@
-﻿namespace Library.Menu
+﻿using System;
+
+namespace Library.Menu
 {
     public class ExitMenuOption : AbstractMenuOption
     {
@@ -8,9 +10,11 @@
         
         public override string Description => "Exit the application";
         
-        public void Execute()
+        public override void Execute(LibrarySystem librarySystem)
         {
-            throw new System.NotImplementedException();
+            Console.Clear();
+            Console.WriteLine("Thank you for using our system!");
+            Environment.Exit(1);
         }
     }
 }

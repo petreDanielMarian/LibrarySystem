@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,7 +8,7 @@ namespace Library
     /// <summary>
     /// https://stackoverflow.com/questions/46908148/controlling-menu-with-the-arrow-keys-and-enter
     /// </summary>
-    public class ConsoleHelper
+    public static class ConsoleHelper
     {
         /// <summary>
         /// Displays the list you gave him as a list with one element under another.
@@ -16,7 +17,7 @@ namespace Library
         /// <param name="menuOptionsDescriptions"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static T MultipleChoicePrompter<T>(IList<T> menuOptionsDescriptions)
+        public static T MultipleChoicePrompter<T>(IList<T> menuOptionsDescriptions, string message)
         {
             const int startX = 1;
             const int startY = 2;
@@ -31,7 +32,8 @@ namespace Library
             do
             {
                 Console.Clear();
-
+                Console.WriteLine(message);
+                
                 for (int i = 0; i < menuOptionsDescriptions.Count; i++)
                 {
                     Console.SetCursorPosition(startX + (i % optionsPerLine), startY + i / optionsPerLine);
@@ -70,6 +72,14 @@ namespace Library
             Console.CursorVisible = true;
 
             return menuOptionsDescriptions.ElementAt(currentSelection);
+        }
+
+        public static void AwaitForAnyKeyPress(string message)
+        {
+            Console.Clear();
+            Console.WriteLine(message);
+            Console.WriteLine("\nPress any key to return to the previous menu...");
+            Console.ReadKey();
         }
     }
 }

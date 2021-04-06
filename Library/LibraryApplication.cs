@@ -1,24 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Library.Menu;
 
 namespace Library
-{
-    public static class LibraryApplication
+{    //TODO Look up naming convention
+    public static class LibraryAppStartPoint
     {
-        public static void Run(Permission selectedUserType)
+        public static Permission SelectedUser { get; set; } = Permission.All;
+        public static LibrarySystem LibrarySystem;
+        
+        public static void Main()
         {
-            IMenuOption selectedClass;
-            IList<IMenuOption> list = MenuOptionsDefinitions.MenuOptions.Where(mo => (mo.Permission & selectedUserType) == selectedUserType).ToList();
+            IMenuOption switchUserAction = new SwitchUserMenuOption();
+            switchUserAction.Execute(LibrarySystem.Instance);
+
+            //Start app
+            Run();
+        }
+        
+        private static void Run()
+        {
             do
             {
-                selectedClass = ConsoleHelper.MultipleChoicePrompter(list);
-                selectedClass.Execute();
+                IList<IMenuOption> list = MenuOptionsDefinitions.MenuOptions.Where(mo => (mo.Permission & SelectedUser) == SelectedUser).ToList();
+                IMenuOption selectedClass = ConsoleHelper.MultipleChoicePrompter(list, string.Empty);
+                selectedClass.Execute(LibrarySystem.Instance);
                 
-            } while (Console.ReadKey(true).Key == ConsoleKey.Escape);
-            
-            Console.WriteLine("\nThe app will now exit! Thanks for using it!");
+            } while (true);
         }
     }
 }
