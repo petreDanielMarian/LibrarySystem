@@ -19,8 +19,7 @@ namespace Library.Menu
             string message;
             if (!booksToBeBorrowed.Any())
             {
-                message = "No books registered. Please ask an Admin to add a book first!";
-                ConsoleHelper.AwaitForAnyKeyPress(message);
+                ConsoleHelper.AwaitForAnyKeyPress(LibraryApplicationConstants.NO_BOOKS_REGISTERED);
                 return;
             }
 

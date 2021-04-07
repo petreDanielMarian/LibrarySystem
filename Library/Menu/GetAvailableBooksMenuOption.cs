@@ -19,7 +19,7 @@ namespace Library.Menu
             
             if (!availableBooks.Any())
             {
-                ConsoleHelper.AwaitForAnyKeyPress("No books registered!");
+                ConsoleHelper.AwaitForAnyKeyPress(LibraryApplicationConstants.NO_BOOKS_REGISTERED);
                 return;
             }
             

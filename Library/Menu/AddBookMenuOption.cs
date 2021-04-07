@@ -2,6 +2,7 @@
 using System.Linq;
 using Library.ExtensionMethods;
 using Library.LibraryBook;
+using static System.String;
 
 namespace Library.Menu
 {
@@ -18,7 +19,7 @@ namespace Library.Menu
             Console.Clear();
             
             Console.WriteLine(LibraryApplicationConstants.ASK_BOOK_NAME);
-            string bookName = Console.ReadLine();
+            string bookName = GetNotNullOrEmptyStringFromInput();
             
             Console.WriteLine(LibraryApplicationConstants.ASK_BOOK_ISBN);
             string bookIsbn = GetValidIsbnNumberFromInput();
@@ -41,6 +42,24 @@ namespace Library.Menu
             ConsoleHelper.AwaitForAnyKeyPress("Book added!");
         }
 
+        private static string GetNotNullOrEmptyStringFromInput()
+        {
+            string value;
+            while (true)
+            {
+                value = Console.ReadLine();
+
+                if (!IsNullOrEmpty(value))
+                {
+                    break;
+                }
+                
+                Console.WriteLine("Please enter a non-empty value!");
+            }
+
+            return value;
+        }
+        
         private static int GetNumericalValueFromInput()
         {
             int value;
@@ -66,7 +85,7 @@ namespace Library.Menu
             {
                 bookIsbn = Console.ReadLine();
 
-                if (!string.IsNullOrEmpty(bookIsbn) &&
+                if (!IsNullOrEmpty(bookIsbn) &&
                     bookIsbn.Length.Equals(LibraryApplicationConstants.LENGTH_OF_ISBN) &&
                     bookIsbn.HasOnlyNumbers())
                 {

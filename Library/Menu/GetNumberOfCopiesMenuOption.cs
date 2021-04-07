@@ -15,7 +15,7 @@ namespace Library.Menu
         {
             if (!librarySystem.RegisteredBooks.Any())
             {
-                ConsoleHelper.AwaitForAnyKeyPress("No borrowed books!");
+                ConsoleHelper.AwaitForAnyKeyPress(LibraryApplicationConstants.NO_BOOKS_REGISTERED);
                 return;
             }
             

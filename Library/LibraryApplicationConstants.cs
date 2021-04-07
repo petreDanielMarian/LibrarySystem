@@ -12,5 +12,6 @@
         public const string ASK_BOOK_ISBN = "Book's ISBN (13 digits):";
         public const string ASK_BOOK_NO_OF_COPIES = "Number of copies:";
         public const string ASK_BOOK_PRICE = "Borrow price (lei):";
+        public const string NO_BOOKS_REGISTERED = "No books registered!";
     }
 }
