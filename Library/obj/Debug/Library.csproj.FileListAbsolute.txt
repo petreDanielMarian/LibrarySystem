@@ -1,5 +1,0 @@
-C:\Users\T0202928\RiderProjects\Library\Library\bin\Debug\Library.exe
-C:\Users\T0202928\RiderProjects\Library\Library\bin\Debug\Library.pdb
-C:\Users\T0202928\RiderProjects\Library\Library\obj\Debug\Library.csprojResolveAssemblyReference.cache
-C:\Users\T0202928\RiderProjects\Library\Library\obj\Debug\Library.exe
-C:\Users\T0202928\RiderProjects\Library\Library\obj\Debug\Library.pdb
