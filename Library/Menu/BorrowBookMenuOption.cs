@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Library.ExtensionMethods;
 using Library.LibraryBook;
 
 namespace Library.Menu
@@ -17,7 +14,7 @@ namespace Library.Menu
         
         public override void Execute(LibrarySystem librarySystem)
         {
-            IList<Book> booksToBeBorrowed = librarySystem.AllRegisteredBooks.Where(b => b.NumberOfCopies > 0).ToList();
+            IList<Book> booksToBeBorrowed = librarySystem.RegisteredBooks.Where(b => b.NumberOfCopies > 0).ToList();
 
             string message;
             if (!booksToBeBorrowed.Any())
@@ -27,16 +24,13 @@ namespace Library.Menu
                 return;
             }
 
-            message = "Select the book you want to borrow:";
-            
+            message = "Select the book you want to borrow:\n Name - ISBN";
             Book selectedBook = ConsoleHelper.MultipleChoicePrompter(booksToBeBorrowed, message);
+
+            ++librarySystem.RegisteredBooks.First(registeredBook => registeredBook.Equals(selectedBook)).NumberOfBorrowedCopies;
+            --librarySystem.RegisteredBooks.First(registeredBook => registeredBook.Equals(selectedBook)).NumberOfCopies;
             
-            
-            
-            ++librarySystem.AllRegisteredBooks.First(registeredBook => registeredBook.Equals(selectedBook)).NumberOfBorrowedCopies;
-            --librarySystem.AllRegisteredBooks.First(registeredBook => registeredBook.Equals(selectedBook)).NumberOfCopies;
-            
-            librarySystem.AllBorrowedBookForms.Add(new BorrowedBookForm(selectedBook));
+            librarySystem.BorrowedBookForms.Add(new BorrowedBookForm(selectedBook));
         }
     }
 }

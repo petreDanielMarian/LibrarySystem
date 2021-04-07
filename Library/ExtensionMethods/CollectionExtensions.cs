@@ -6,24 +6,25 @@ namespace Library.ExtensionMethods
 {
     public static class CollectionExtensions
     {
-        public static bool TryRemove<T>(this IList<T> list, T element)
-        {
-            if (list.Contains(element))
-            {
-                return list.Remove(element);
-            }
-
-            return false;
-        }
-        
+        /// <summary>
+        /// Removes the first element from the list that fulfills the match
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="match"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <exception cref="ArgumentNullException"></exception>
         public static void RemoveFirst<T>(this IList<T> list, Predicate<T> match)
         {
             if (match == null) {
                 throw new ArgumentNullException("match");
             }
 
-            T elemToRemove = list.First(elem => match(elem));
-            list.TryRemove(elemToRemove);
+            T elemToRemove = list.FirstOrDefault(elem => match(elem));
+            
+            if (elemToRemove != null)
+            {
+                list.Remove(elemToRemove);
+            }
         }
     }
 }

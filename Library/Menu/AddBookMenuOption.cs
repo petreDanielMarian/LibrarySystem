@@ -17,33 +17,31 @@ namespace Library.Menu
         {
             Console.Clear();
             
-            Console.WriteLine("Book name: ");
+            Console.WriteLine(LibraryApplicationConstants.ASK_BOOK_NAME);
             string bookName = Console.ReadLine();
             
-            Console.WriteLine("Book's ISBN (13 digits): ");
-            string bookIsbn = ValidateIsbnNumber();
+            Console.WriteLine(LibraryApplicationConstants.ASK_BOOK_ISBN);
+            string bookIsbn = GetValidIsbnNumberFromInput();
             
-            Console.WriteLine("Number of copies: ");
-            int numberOfCopies = ExtractNumericalValueFromInput();
+            Console.WriteLine(LibraryApplicationConstants.ASK_BOOK_NO_OF_COPIES);
+            int numberOfCopies = GetNumericalValueFromInput();
 
-            Console.WriteLine("Price for a delayed return (lei): ");
-            int delayedReturnPrice = ExtractNumericalValueFromInput();
+            Console.WriteLine(LibraryApplicationConstants.ASK_BOOK_PRICE);
+            int delayedReturnPrice = GetNumericalValueFromInput();
 
-            string message;
-            if (!BookIsbnIsUnique(librarySystem, bookIsbn))
+            if (BookIsbnIsAlreadyInLibrary(librarySystem, bookIsbn))
             {
-                message = $"Book with the same ISBN \"{bookIsbn}\" already exists!\nThe book was not registered, please try again!";
+                string message = $"Book with the same ISBN \"{bookIsbn}\" already exists!\nThe book was not registered, please try again!";
                 ConsoleHelper.AwaitForAnyKeyPress(message);
                 return;
             }
             
-            librarySystem.AllRegisteredBooks.Add(new Book(bookName, bookIsbn, numberOfCopies, delayedReturnPrice));
+            librarySystem.RegisteredBooks.Add(new Book(bookName, bookIsbn, numberOfCopies, delayedReturnPrice));
             
-            message = $"Book added!";
-            ConsoleHelper.AwaitForAnyKeyPress(message);
+            ConsoleHelper.AwaitForAnyKeyPress("Book added!");
         }
 
-        private static int ExtractNumericalValueFromInput()
+        private static int GetNumericalValueFromInput()
         {
             int value;
             while (true)
@@ -61,7 +59,7 @@ namespace Library.Menu
             return value;
         }
         
-        private static string ValidateIsbnNumber()
+        private static string GetValidIsbnNumberFromInput()
         {
             string bookIsbn;
             while (true)
@@ -81,9 +79,9 @@ namespace Library.Menu
             return bookIsbn;
         }
 
-        private static bool BookIsbnIsUnique(LibrarySystem librarySystem, string isbn)
+        public bool BookIsbnIsAlreadyInLibrary(LibrarySystem librarySystem, string isbn)
         {
-            return librarySystem.AllRegisteredBooks.Count(b => b.ISBN.Equals(isbn)) <= 1;
+            return librarySystem.RegisteredBooks.Count(b => b.ISBN.Equals(isbn)) == 1;
         }
     }
 }

@@ -9,6 +9,7 @@
         public virtual void Execute(LibrarySystem librarySystem)
         {
             //Not implemented
+            ConsoleHelper.AwaitForAnyKeyPress("IAUTEAICI");
         }
 
         #region Equality

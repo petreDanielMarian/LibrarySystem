@@ -12,17 +12,18 @@ namespace Library.LibraryBook
         }
 
         public Book BorrowedBook { get; }
-        public DateTime BorrowDate { get; }
-        public bool BookReturnedOnTime => (BorrowDate - DateTime.Today).TotalDays < LibraryApplicationConstants.TWO_WEEKS_IN_DAYS;
+        public DateTime BorrowDate { get; set; }
+        public bool BookReturnedOnTime => (DateTime.Today - BorrowDate).TotalDays <= LibraryApplicationConstants.TWO_WEEKS_IN_DAYS;
         public double DelayedReturnFee { get; private set; }
 
         public void CalculateDelayedReturnFee()
         {
-            TimeSpan timeSinceBorrowing = BorrowDate - DateTime.Today;
+            TimeSpan timeSinceBorrowing = DateTime.Today - BorrowDate;
 
             if (!BookReturnedOnTime)
             {
                 double delayedDays = timeSinceBorrowing.TotalDays - LibraryApplicationConstants.TWO_WEEKS_IN_DAYS;
+                // formula used: 1% * Book's price * numbers of days overdue
                 DelayedReturnFee = LibraryApplicationConstants.DELAYED_RETURN_FEE_PERCENT *
                                    BorrowedBook.PriceOfReturnDelay * delayedDays;
                 return;
@@ -33,7 +34,7 @@ namespace Library.LibraryBook
         
         public string GetDisplayMessageBasedOnTheFee()
         {
-            if (DelayedReturnFee == 0.0)
+            if (BookReturnedOnTime)
             {
                 return "Congrats! You returned the book on time!";
             }
@@ -52,7 +53,7 @@ namespace Library.LibraryBook
 
         public override int GetHashCode()
         {
-            return (BorrowedBook != null ? BorrowedBook.GetHashCode() : 0);
+            return BorrowedBook != null ? BorrowedBook.GetHashCode() : 0;
         }
 
         #endregion

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Library.LibraryBook;
 
 namespace Library.Menu
@@ -14,15 +13,14 @@ namespace Library.Menu
         
         public override void Execute(LibrarySystem librarySystem)
         {
-            if (!librarySystem.AllRegisteredBooks.Any())
+            if (!librarySystem.RegisteredBooks.Any())
             {
                 ConsoleHelper.AwaitForAnyKeyPress("No borrowed books!");
                 return;
             }
             
-            string message = "Choose a book:\nName - ISBN";
-            
-            Book book = ConsoleHelper.MultipleChoicePrompter(librarySystem.AllRegisteredBooks, message);
+            string message = "Choose a book:\n Name - ISBN";
+            Book book = ConsoleHelper.MultipleChoicePrompter(librarySystem.RegisteredBooks.OrderBy(b => b.Name).ToList(), message);
             
             string awaitMessage = $"Book titled \"{book.Name}\" has {book.NumberOfCopies} copies in our library, the rest of {book.NumberOfBorrowedCopies} are borrowed";
             ConsoleHelper.AwaitForAnyKeyPress(awaitMessage);

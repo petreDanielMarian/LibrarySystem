@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Library.ExtensionMethods;
 using Library.LibraryBook;
 
@@ -16,26 +14,27 @@ namespace Library.Menu
         
         public override void Execute(LibrarySystem librarySystem)
         {
-            if (!librarySystem.AllBorrowedBookForms.Any())
+            if (!librarySystem.BorrowedBookForms.Any())
             {
                 ConsoleHelper.AwaitForAnyKeyPress("No borrowed books!");
                 return;
             }
             
-            string message = "Choose a book to return:";
-            BorrowedBookForm returnedBookForm = ConsoleHelper.MultipleChoicePrompter(librarySystem.AllBorrowedBookForms, message);
+            string message = "Choose a book to return:\n Borrow Date - Name - ISBN";
+            BorrowedBookForm returnedBookForm = ConsoleHelper.MultipleChoicePrompter(librarySystem.BorrowedBookForms.OrderBy(bf => bf.BorrowDate).ToList(), message);
 
-            ++librarySystem.AllRegisteredBooks.First(book => book.Equals(returnedBookForm.BorrowedBook)).NumberOfCopies;
-            --librarySystem.AllRegisteredBooks.First(book => book.Equals(returnedBookForm.BorrowedBook)).NumberOfBorrowedCopies;
+            ++librarySystem.RegisteredBooks.First(book => book.Equals(returnedBookForm.BorrowedBook)).NumberOfCopies;
+            --librarySystem.RegisteredBooks.First(book => book.Equals(returnedBookForm.BorrowedBook)).NumberOfBorrowedCopies;
             
             returnedBookForm.CalculateDelayedReturnFee();
             message = returnedBookForm.GetDisplayMessageBasedOnTheFee();
             
             ConsoleHelper.AwaitForAnyKeyPress(message);
 
-            librarySystem.AllBorrowedBookForms.RemoveFirst(form => form.Equals(returnedBookForm));
+            //delete the form for this book
+            librarySystem.BorrowedBookForms.RemoveFirst(form => form.Equals(returnedBookForm));
 
-            message = $"\nBook titled {returnedBookForm.BorrowedBook.Name} was successfully returned!\nWe hope you had a blast!";
+            message = $"Book titled {returnedBookForm.BorrowedBook.Name} was successfully returned!\nWe hope you had a blast!";
             ConsoleHelper.AwaitForAnyKeyPress(message);
         }
     }

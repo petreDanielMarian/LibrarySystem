@@ -3,11 +3,10 @@ using System.Linq;
 using Library.Menu;
 
 namespace Library
-{    //TODO Look up naming convention
-    public static class LibraryAppStartPoint
+{
+    public static class LibraryApplication
     {
         public static Permission SelectedUser { get; set; } = Permission.All;
-        public static LibrarySystem LibrarySystem;
         
         public static void Main()
         {

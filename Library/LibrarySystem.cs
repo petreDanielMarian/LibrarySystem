@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Linq;
 using Library.LibraryBook;
 
 namespace Library
@@ -7,12 +10,12 @@ namespace Library
     {
         private LibrarySystem()
         {
-            AllBorrowedBookForms = new List<BorrowedBookForm>();
-            AllRegisteredBooks = new List<Book>();
+            BorrowedBookForms = new List<BorrowedBookForm>();
+            RegisteredBooks = new List<Book>();
         }
 
         public static LibrarySystem Instance { get; } = new LibrarySystem();
-        public IList<Book> AllRegisteredBooks { get; }
-        public IList<BorrowedBookForm> AllBorrowedBookForms { get; }
+        public IList<Book> RegisteredBooks { get; }
+        public IList<BorrowedBookForm> BorrowedBookForms { get; }
     }
 }

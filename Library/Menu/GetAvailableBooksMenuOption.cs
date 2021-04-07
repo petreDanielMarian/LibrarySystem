@@ -15,7 +15,7 @@ namespace Library.Menu
         
         public override void Execute(LibrarySystem librarySystem)
         {
-            IEnumerable<Book> availableBooks = librarySystem.AllRegisteredBooks.Where(book => book.NumberOfCopies > 0).ToList();
+            IEnumerable<Book> availableBooks = librarySystem.RegisteredBooks.Where(book => book.NumberOfCopies > 0).OrderBy(b => b.Name).ToList();
             
             if (!availableBooks.Any())
             {
@@ -25,10 +25,10 @@ namespace Library.Menu
             
             Console.Clear();
             
-            Console.WriteLine("Number of copies - Name\t: ISBN");
+            Console.WriteLine("Number of copies - Name - ISBN - Price");
             foreach (Book availableBook in availableBooks)
             {
-                Console.WriteLine($"{availableBook.NumberOfCopies}\t\t- {availableBook.Name}\t: {availableBook.ISBN}");
+                Console.WriteLine($"{availableBook.NumberOfCopies} copies - {availableBook.Name} - {availableBook.ISBN} - {availableBook.PriceOfReturnDelay} lei");
             }
             
             Console.WriteLine("\nPress any key to return to the previous menu...");

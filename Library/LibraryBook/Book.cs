@@ -9,8 +9,7 @@
         }
         
         public int NumberOfCopies { get; set; }
-        
         public int NumberOfBorrowedCopies { get; set; }
-        public int PriceOfReturnDelay { get; set; }
+        public int PriceOfReturnDelay { get; }
     }
 }

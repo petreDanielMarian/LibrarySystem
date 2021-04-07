@@ -12,8 +12,6 @@ namespace Library.Menu
         
         public override void Execute(LibrarySystem librarySystem)
         {
-            Console.Clear();
-            Console.WriteLine("Thank you for using our system!");
             Environment.Exit(1);
         }
     }
